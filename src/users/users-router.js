@@ -16,7 +16,7 @@ usersRouter
         })
 
     // TODO: check user_name doesn't start with spaces
-
+      console.log('here',password,user_name)
     const passwordError = UsersService.validatePassword(password)
 
     if (passwordError)
@@ -27,11 +27,15 @@ usersRouter
       user_name
     )
       .then(hasUserWithUserName => {
+        console.log('here 2',hasUserWithUserName)
+
         if (hasUserWithUserName)
           return res.status(400).json({ error: `Username already taken` })
 
         return UsersService.hashPassword(password)
           .then(hashedPassword => {
+            console.log('here 3',hashedPassword)
+
             const newUser = {
               "business_name": user_name,
               "business_password": hashedPassword,
@@ -44,6 +48,7 @@ usersRouter
               newUser
             )
               .then(user => {
+                console.log('here 4',user)
                 res
                   .status(201)
                   .location(path.posix.join(req.originalUrl, `/${user.id}`))
