@@ -170,6 +170,7 @@ scheduleRouter
       req.params.data_id
     )
       .then(data => {
+        console.log('data has been collected,',data)
         if (!data || data.length < 1) {
           return res.status(404).json({
             error: { message: `Data Not Found` }
