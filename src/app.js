@@ -30,9 +30,7 @@ app.use(cors())
 app.use(function tableHeader(req, res, next){
   //grab the table from the header
   const table = req.get('table');
-  
-  console.log('started')
-  
+    
   app.set('table', table);
   
       // move to the next middleware
