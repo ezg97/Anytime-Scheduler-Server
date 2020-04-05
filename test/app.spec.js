@@ -1,3 +1,13 @@
+/*
+Instructions:
+1) Create the user 'dunder-mifflin' WITH the password: 'password' 
+2) Create a database named 'test_scheduler'
+3) Create two tables:
+     A) Run Migration 1 AND migration 2
+     B) Seed the info for the above tables
+4) Run the test and all 18 will pass
+*/
+
 const knex = require('knex');
 
 const fixtures = require('./anytime-fixtures');
@@ -29,17 +39,6 @@ describe('Anytime Scheduler Endpoints', () => {
     
     after('disconnect from db', () => db.destroy())
 
-
-    // before('cleanup', () => db('operation').truncate())
-
-    // UNCOMMENT before('cleanup', () => db('business').truncate())
-
-
-    // afterEach('cleanup', () => db('operation').truncate())
-
-    // UNCOMMENT afterEach('cleanup', () => db('business').truncate())
-    
-
     /* ------------------------
 
               POST /auth/login 
@@ -52,7 +51,6 @@ describe('Anytime Scheduler Endpoints', () => {
       ------------------------ */
 
         let businessInfo = fixtures.business();
-        // const { business_name, business_password } = businessInfo[0];
         businessInfo = businessInfo[0];
          const userInfo = { 'user_name': businessInfo.business_name, 'password': businessInfo.business_password }
 
@@ -98,29 +96,10 @@ describe('Anytime Scheduler Endpoints', () => {
     describe('GET /all', () => {
 
         /* -----------------------
-              - BUSINESS: Empty Table    
-      ------------------------ */
-        // context(`BUSINESS: no table given`, () => {
-        //   it(`responds with 200 and an empty list`, () => {
-        //     return supertest(app)
-        //       .get('/all')
-        //       .set('Authorization', `bearer ${getAuthToken()}`)
-        //       .set('table', `business`)
-        //       .expect(200, [])
-        //   })
-        // })
-
-        /* -----------------------
               - BUSINESS: Full Table    
       ------------------------ */
         context('BUSINESS: Given if there are businesses in the database', () => {
           const testBusiness = fixtures.business();
-
-          // beforeEach('insert businesses', () => {
-          //   return db
-          //     .into('business')
-          //     .insert(testBusiness)
-          // })
 
           it('gets the business from the store', () => {
             return supertest(app)
@@ -141,38 +120,7 @@ describe('Anytime Scheduler Endpoints', () => {
         })
 
 
-        /* -----------------------
-              - OPERATION: Empty Table    
-      ------------------------ *//*
-      context(`OPERATION: no table given`, () => {
-        it(`responds with 200 and an empty list`, () => {
-          return supertest(app)
-            .get('/all')
-            .set('table', `operation`)
-            .expect(200, [])
-        })
-      })*/
-
-      /* -----------------------
-            - OPERATION: Full Table    
-    ------------------------ *//*
-      context('OPERATION: Given if there are operations in the database', () => {
-        const testoperation = fixtures.operationHours();
-
-        beforeEach('insert operation', () => {
-          return db
-            .into('operation')
-            .insert(testoperation)
-        })
-
-        it('gets the business from the store', () => {
-          return supertest(app)
-            .get('/all')
-            .set('table', `operation`)
-            .expect(200, testoperation)
-        })
-      })
-      */
+        
 
     })
 
@@ -181,14 +129,6 @@ describe('Anytime Scheduler Endpoints', () => {
       ------------------------ */
     context(`BUSINESS: Given if there's an XSS attack`, () => {
       const { maliciousBusiness, expectedBusiness } = fixtures.maliciousBusiness()
-
-        //console.log(maliciousBusiness)
-
-        // beforeEach('insert malicious business', () => {
-        //   return db
-        //     .into('business')
-        //     .insert([maliciousBusiness])
-        // })
 
         it('removes XSS attack content', () => {
           return supertest(app)
@@ -203,9 +143,6 @@ describe('Anytime Scheduler Endpoints', () => {
       
     })
     /* ******************************************************************************* */
-
-
-
 
     /* ------------------------
 
@@ -227,98 +164,7 @@ describe('Anytime Scheduler Endpoints', () => {
               .set('table', `business`)
               .expect(400, `Empty request body`)
           })
-      /*
-          it(`responds with 400 missing 'url' if not supplied`, () => {
-            const newBookmarkMissingUrl = {
-              title: 'test-title',
-              // url: 'https://test.com',
-              rating: 1,
-            }
-            return supertest(app)
-              .post(`/bookmarks`)
-              .send(newBookmarkMissingUrl)
-              .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-              .expect(400, `'url' is required`)
-          })
-      
-          it(`responds with 400 missing 'rating' if not supplied`, () => {
-            const newBookmarkMissingRating = {
-              title: 'test-title',
-              url: 'https://test.com',
-              // rating: 1,
-            }
-            return supertest(app)
-              .post(`/bookmarks`)
-              .send(newBookmarkMissingRating)
-              .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-              .expect(400, `'rating' is required`)
-          })
-      
-          it(`responds with 400 invalid 'rating' if not between 0 and 5`, () => {
-            const newBookmarkInvalidRating = {
-              title: 'test-title',
-              url: 'https://test.com',
-              rating: 'invalid',
-            }
-            return supertest(app)
-              .post(`/bookmarks`)
-              .send(newBookmarkInvalidRating)
-              .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-              .expect(400, `'rating' must be a number between 0 and 5`)
-          })
-      
-          it(`responds with 400 invalid 'url' if not a valid URL`, () => {
-            const newBookmarkInvalidUrl = {
-              title: 'test-title',
-              url: 'htp://invalid-url',
-              rating: 1,
-            }
-            return supertest(app)
-              .post(`/bookmarks`)
-              .send(newBookmarkInvalidUrl)
-              .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-              .expect(400, `'url' must be a valid URL`)
-          })
-      
-          it('adds a new bookmark to the store', () => {
-            const newBookmark = {
-              title: 'test-title',
-              url: 'https://test.com',
-              description: 'test description',
-              rating: 1,
-            }
-            return supertest(app)
-              .post(`/bookmarks`)
-              .send(newBookmark)
-              .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-              .expect(201)
-              .expect(res => {
-                expect(res.body.title).to.eql(newBookmark.title)
-                expect(res.body.url).to.eql(newBookmark.url)
-                expect(res.body.description).to.eql(newBookmark.description)
-                expect(res.body.rating).to.eql(newBookmark.rating)
-                expect(res.body).to.have.property('id')
-              })
-              .then(res =>
-                supertest(app)
-                  .get(`/bookmarks/${res.body.id}`)
-                  .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-                  .expect(res.body)
-              )
-          })
-      
-          it('removes XSS attack content from response', () => {
-            const { maliciousBookmark, expectedBookmark } = fixtures.makeMaliciousBookmark()
-            return supertest(app)
-              .post(`/bookmarks`)
-              .send(maliciousBookmark)
-              .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-              .expect(201)
-              .expect(res => {
-                expect(res.body.title).to.eql(expectedBookmark.title)
-                expect(res.body.description).to.eql(expectedBookmark.description)
-              })
-          })*/
+     
         })
         /* ******************************************************************************* */
 
@@ -355,12 +201,6 @@ describe('Anytime Scheduler Endpoints', () => {
           context('BUSINESS: Given if id exists', () => {
             const testBusiness = fixtures.business()
       
-            // beforeEach('insert business', () => {
-            //   return db
-            //     .into('business')
-            //     .insert(testBusiness)
-            // })
-      
             it('responds with 200 and the specified business', () => {
               const businessId = 2
               const {id, business_name} = testBusiness[businessId - 1];
@@ -382,12 +222,6 @@ describe('Anytime Scheduler Endpoints', () => {
           ------------------------ */
           context(`BUSINESS: Given if there's an XSS attack`, () => {
             const { maliciousBusiness, expectedBusiness } = fixtures.maliciousBusiness()
-      
-            // beforeEach('insert malicious business', () => {
-            //   return db
-            //     .into('business')
-            //     .insert([maliciousBusiness])
-            // })
       
             it('removes XSS attack content', () => {
               return supertest(app)
@@ -512,16 +346,8 @@ describe('Anytime Scheduler Endpoints', () => {
           context('BUSINESS: Given if ID exists', () => {
             const testBusiness = fixtures.business()
 
-            
-            // after('reset buisness_name', () => {
-            //   return db
-            //     .into('business')
-            //     .update('')
-            // })
-
             it('Updates the business by ID from the store', () => {
-              //randomly generate a name
-              //const randomName =  Math.random().toString(32).slice(-5);
+            
               //chose id to update
               const idToUpdate = 6;
               //create revision data
@@ -534,11 +360,6 @@ describe('Anytime Scheduler Endpoints', () => {
               const {id, business_name} = expectedBusiness;
 
               expectedBusiness =[ {id, business_name} ];
-
-
-              //use the spread operator to combine the "expected info" with the "revised info"
-              //expectedBusiness = {...expectedBusiness, ... revision};
-
 
               return supertest(app)
                 .patch(`/${idToUpdate}`)
@@ -557,11 +378,7 @@ describe('Anytime Scheduler Endpoints', () => {
           })
     })
 
-
-      
       /* ******************************************************************************* */
-
-
 
 
     /* ------------------------
@@ -587,12 +404,6 @@ describe('Anytime Scheduler Endpoints', () => {
     
         context('BUSINESS: Given if id exists', () => {
           const testEmployees = fixtures.employees()
-    
-          // beforeEach('insert business', () => {
-          //   return db
-          //     .into('business')
-          //     .insert(testBusiness)
-          // })
     
           it('responds with 200 and the specified business', () => {
             const businessId = 3

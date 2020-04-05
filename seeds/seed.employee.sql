@@ -5,14 +5,16 @@ TRUNCATE  employee;
 INSERT INTO employee
   (business_id, emp_name, emp_availability)
   VALUES
-  (1, 'John Diggle', 'FT'),
-  (1, 'Bruce Kent', 'FT'),
-  (1, 'Clark Wayne', 'FT'),
-  (1, 'ELijah Warrior', 'PT'),
-  (1, 'Ray Friel', 'FT'),
+  (1, 'Paul Washer', 'FT'),
+  (1, 'Colin Smith', 'FT'),
+  (1, 'Steve Lawson', 'FT'),
+  (1, 'Charles Spurgeon', 'FT'),
+  (1, 'Leonard Ravenhill', 'FT'),
+  (1, 'John Calvin', 'PT'),
+  (1, 'Johnny Mac', 'PT'),
+  (1, 'Conrad Embewe', 'FT'),
+  (1, 'Ravi Zecharias', 'FT'),
+  (1, 'Abner Chou', 'FT'),
 
-  (2, 'Earl Thomas', 'FT'),
-  (2, 'John Wayne', 'FT'),
-  (2, 'Paul Washer', 'FT'),
+  (2, 'John K', 'FT');
   
-  (3, 'Colin Smith', 'FT');
