@@ -42,7 +42,9 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Body: User name and password
 
+------
 ### All of the following endpoints are protected and must first pass through authorization middleware.
+------
 
 ### 4. **GET Info**
 #### GETS all the info a table (from the header)
