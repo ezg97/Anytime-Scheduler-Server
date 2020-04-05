@@ -57,7 +57,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 - Body: None
 
 ### 5. **POST Info**
-####POSTS info (from body) to a table name (from the header)
+#### POSTS info (from body) to a table name (from the header)
 - URL: /all
 
 - Method: POST
@@ -70,7 +70,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 
 ### 6. **GET Info**
-####GETS a single row by id (params) from a table (header) and returns to the client
+#### GETS a single row by id (params) from a table (header) and returns to the client
 - URL: /:data_id
 
 - Method: GET
@@ -83,7 +83,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 
 ### 7. **DELETES Info**
-####DELETES a single row by id (params) from a table (header).
+#### DELETES a single row by id (params) from a table (header).
 - URL: /:data_id
 
 - Method: DELETE
@@ -96,7 +96,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 
 ### 8. **PATCHES info**
-####PATCHES a single row by id (params) from a table (header).
+#### PATCHES a single row by id (params) from a table (header).
 - URL: /:data_id
 
 - Method: PATCH
@@ -108,7 +108,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 - Body: None
 
 ### 9. **GETS info**
-####GETS a single row by the business_id (params) from a table (header).
+#### GETS a single row by the business_id (params) from a table (header).
 - URL: /business/:business_id
 
 - Method: GET
@@ -121,7 +121,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 
 ### 10. **DELETES info**
-####DELETSE a single row by the business_id (params) from a table (header).
+#### DELETES a single row by the business_id (params) from a table (header).
 - URL: /business/:business_id
 
 - Method: DELETE
