@@ -13,7 +13,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 ## API Endpoints:
 
 ### 1. **User Login**
-####Returns a JWT for use as authentication throughout the application, **if** the user info provided is a valid account
+#### Returns a JWT for use as authentication throughout the application, **if** the user info provided is a valid account
 - URL: /api/auth/login
 
 - Method: POST
@@ -23,7 +23,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 - Body: User name and password
 
 ### 2. **User Signup**
-####Creates the user account and makes a request to the /login endpoint once created, **if** the user info provided is a valid and doesn't already exist
+#### Creates the user account and makes a request to the /login endpoint once created, **if** the user info provided is a valid and doesn't already exist
 - URL: /api/users/
 
 - Method: POST
@@ -33,7 +33,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 - Body: User name and password
 
 ### 3. **User Signup**
-####Creates the user account and makes a request to the /login endpoint once created, **if** the user info provided is a valid and doesn't already exist
+#### Creates the user account and makes a request to the /login endpoint once created, **if** the user info provided is a valid and doesn't already exist
 - URL: /api/users/
 
 - Method: POST
@@ -42,10 +42,10 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Body: User name and password
 
-## All of the following endpoints are protected and must first pass through authorization middleware.
+### All of the following endpoints are protected and must first pass through authorization middleware.
 
 ### 4. **GET Info**
-####GETS all the info a table (from the header)
+#### GETS all the info a table (from the header)
 - URL: /all
 
 - Method: GET
