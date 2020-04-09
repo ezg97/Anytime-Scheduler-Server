@@ -261,7 +261,7 @@ scheduleRouter
     req.params.business_id
   )
     .then(data => {
-      if (!data || data.length < 1) {
+      if (!data ) {
         return res.status(404).json({
           error: { message: `Data Not Found` }
         })
