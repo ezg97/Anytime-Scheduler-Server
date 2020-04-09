@@ -391,14 +391,12 @@ describe('Anytime Scheduler Endpoints', () => {
         //every table besides business has a business id endpoint
         
         context(`BUSINESS: Given if business_id doesn't exist`, () => {
-          it(`responds 404 when business doesn't exist`, () => {
+          it(`responds 200 and empty list when business doesn't exist`, () => {
             return supertest(app)
               .get(`/business/123`)
               .set('Authorization', `bearer ${getAuthToken()}`)
               .set('table', `employee`)
-              .expect(404, {
-                error: { message: `Data Not Found` }
-              })
+              .expect(200);
           })
         })
     
@@ -459,9 +457,8 @@ describe('Anytime Scheduler Endpoints', () => {
               .delete(`/business/999`)
               .set('Authorization', `bearer ${getAuthToken()}`)
               .set('table', `employee`)
-              .expect(404, {
-                error: { message: `Data Not Found` }
-              })
+              //the client cannot search for users, the only users they can delete are the users they get from the database... aka they exist
+              .expect(204);
           })
         })
 
