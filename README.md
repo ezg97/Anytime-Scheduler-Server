@@ -51,6 +51,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 - JSON inputs (parameters): None
 
 - JSON outputs (parameters): Returns all the info from a table
+
 `{ id: <integer>, business_name: <string>, business_password: <string>, ... }`
 
 ### 4. **POST Info**
@@ -64,6 +65,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 - Headers: `Authorization: Bearer <token> and table: <table_name>`
 
 - Body: The info you wish to add to the table, changes per table. The keys represent the columns and the values represent the data stored in the row
+
 `{ <column_1>: <row_value>, <column_2>: <row_value>, <column_3>: <row_value>, etc. }`
 
 
