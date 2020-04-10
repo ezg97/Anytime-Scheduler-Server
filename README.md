@@ -63,9 +63,11 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Headers: `Authorization: Bearer <token> and table: <table_name>`
 
-- Body: The info you wish to add to the table, changes per table. The keys represent the columns and the values represent the data stored in the row
+- JSON inputs (parameters): The info you wish to add to the table, changes per table. The keys represent the columns and the values represent the data stored in the row
   `{ <column_1>: <row_value>, <column_2>: <row_value>, <column_3>: <row_value>, etc. }`
 
+- JSON outputs (parameters): Returns the data that was posted to the table
+  `{ <column_1>: <row_value>, <column_2>: <row_value>, <column_3>: <row_value>, etc. }`
 
 ### 5. **GET Info**
 #### GETS a single row by id (params) from a table (header) and returns to the client
@@ -77,7 +79,10 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Headers: `Authorization: Bearer <token> and table: <table_name>`
 
-- Body: None
+- JSON inputs (parameters): None
+
+- JSON outputs (parameters): Returns the row that's id matches the query parameter
+  `{ <column_1>: <row_value>, etc. }`
 
 
 ### 6. **DELETES Info**
@@ -90,7 +95,9 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Headers: `Authorization: Bearer <token> and table: <table_name>`
 
-- Body: None
+- JSON inputs (parameters): None
+
+- JSON outputs (parameters): None (only a 204 status code is successful).
 
 
 ### 7. **PATCHES info**
@@ -101,9 +108,10 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Query Params: id (integer)
 
-- Headers: `Authorization: Bearer <token> and table: <table_name>`
+- JSON inputs (parameters): The info you wish to patch to the row
+  `{ <column_1>: <row_value>, etc. }`
 
-- Body: None
+- JSON outputs (parameters): None (only a 204 status code is successful).
 
 ### 8. **GETS info**
 #### GETS a single row by the business_id (params) from a table (header).
@@ -113,9 +121,10 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Query Params: id (integer)
 
-- Headers: `Authorization: Bearer <token> and table: <table_name>`
+- JSON inputs (parameters): None
 
-- Body: None
+- JSON outputs (parameters): Returns the row that's id matches the query parameter
+  `{ <column_1>: <row_value>, etc. }`
 
 
 ### 9. **DELETES info**
@@ -128,5 +137,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Headers: `Authorization: Bearer <token> and table: <table_name>`
 
-- Body: None
+- JSON inputs (parameters): None
+
+- JSON outputs (parameters): None (only a 204 status code is successful).
 
