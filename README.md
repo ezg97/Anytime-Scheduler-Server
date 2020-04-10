@@ -24,6 +24,8 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - JSON inputs (parameters): `{ user_name: <user_name>, password: <password> }`
 
+- JSON outputs (parameters): `{ authToken: <token>, id: <id_number> }`
+
 ### 2. **User Signup**
 #### Creates the user account and makes a request to the /login endpoint once created, **if** the user info provided is a valid and doesn't already exist
 - URL: /api/users/
@@ -32,7 +34,11 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Url Params: None
 
-- Body: User name and password
+- Headers: `Authorization: Bearer <token> and table: <table_name>`
+
+- JSON inputs (parameters): `{ user_name: <user_name>, password: <password> }`
+
+- JSON outputs (parameters): response object (use `res.status` to verify if login was successful.
 
 ### 3. **User Signup**
 #### Creates the user account and makes a request to the /login endpoint once created, **if** the user info provided is a valid and doesn't already exist
