@@ -20,7 +20,7 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Url Params: None
 
-- Body: User name and password
+- JSON inputs (parameters): `{ user_name: <user_name>, password: <password> }`
 
 ### 2. **User Signup**
 #### Creates the user account and makes a request to the /login endpoint once created, **if** the user info provided is a valid and doesn't already exist
