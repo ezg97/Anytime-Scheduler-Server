@@ -20,11 +20,9 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Query Params: None
 
-- Headers: `Authorization: Bearer <token> and table: <table_name>`
-
 - JSON inputs (parameters): `{ user_name: <user_name>, password: <password> }`
 
-- JSON outputs (parameters): `{ authToken: <token>, id: <id_number> }`
+- JSON outputs (parameters): `{ authToken: <token>, id: <number> }`
 
 ### 2. **User Signup**
 #### Creates the user account and makes a request to the /login endpoint once created, **if** the user info provided is a valid and doesn't already exist
@@ -32,113 +30,103 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Method: POST
 
-- Url Params: None
-
-- Headers: `Authorization: Bearer <token> and table: <table_name>`
+- Query Params: None
 
 - JSON inputs (parameters): `{ user_name: <user_name>, password: <password> }`
 
-- JSON outputs (parameters): response object (use `res.status` to verify if login was successful.
-
-### 3. **User Signup**
-#### Creates the user account and makes a request to the /login endpoint once created, **if** the user info provided is a valid and doesn't already exist
-- URL: /api/users/
-
-- Method: POST
-
-- Url Params: None
-
-- Body: User name and password
+- JSON outputs (parameters): response object (use `res.status` to verify if login was successful).
 
 ------
 ### All of the following endpoints are protected and must first pass through authorization middleware.
 ------
 
-### 4. **GET Info**
+### 3. **GET Info**
 #### GETS all the info a table (from the header)
 - URL: /all
 
 - Method: GET
 
-- Url Params: None
+- Query Params: None
 
-- Headers: table name and JWT token
+- JSON inputs (parameters): None
 
-- Body: None
+- JSON outputs (parameters): Returns all the info from a table
+`{ id: <integer>, business_name: <string>, business_password: <string>, ... }`
 
-### 5. **POST Info**
+### 4. **POST Info**
 #### POSTS info (from body) to a table name (from the header)
 - URL: /all
 
 - Method: POST
 
-- Url Params: None
+- Query Params: None
 
-- Headers: table name and JWT token
+- Headers: `Authorization: Bearer <token> and table: <table_name>`
 
-- Body: info required (changes per table)
+- Body: The info you wish to add to the table, changes per table. The keys represent the columns and the values represent the data stored in the row
+`{ <column_1>: <row_value>, <column_2>: <row_value>, <column_3>: <row_value>, etc. }`
 
 
-### 6. **GET Info**
+### 5. **GET Info**
 #### GETS a single row by id (params) from a table (header) and returns to the client
 - URL: /:data_id
 
 - Method: GET
 
-- Url Params: id (integer)
+- Query Params: id (integer)
 
-- Headers: table name and JWT token
+- Headers: `Authorization: Bearer <token> and table: <table_name>`
 
 - Body: None
 
 
-### 7. **DELETES Info**
+### 6. **DELETES Info**
 #### DELETES a single row by id (params) from a table (header).
 - URL: /:data_id
 
 - Method: DELETE
 
-- Url Params: id (integer)
+- Query Params: id (integer)
 
-- Headers: table name and JWT token
+- Headers: `Authorization: Bearer <token> and table: <table_name>`
 
 - Body: None
 
 
-### 8. **PATCHES info**
+### 7. **PATCHES info**
 #### PATCHES a single row by id (params) from a table (header).
 - URL: /:data_id
 
 - Method: PATCH
 
-- Url Params: id (integer)
+- Query Params: id (integer)
 
-- Headers: table name and JWT token
+- Headers: `Authorization: Bearer <token> and table: <table_name>`
 
 - Body: None
 
-### 9. **GETS info**
+### 8. **GETS info**
 #### GETS a single row by the business_id (params) from a table (header).
 - URL: /business/:business_id
 
 - Method: GET
 
-- Url Params: id (integer)
+- Query Params: id (integer)
 
-- Headers: table name and JWT token
+- Headers: `Authorization: Bearer <token> and table: <table_name>`
 
 - Body: None
 
 
-### 10. **DELETES info**
+### 9. **DELETES info**
 #### DELETES a single row by the business_id (params) from a table (header).
 - URL: /business/:business_id
 
 - Method: DELETE
 
-- Url Params: id (integer)
+- Query Params: id (integer)
 
-- Headers: table name and JWT token
+- Headers: `Authorization: Bearer <token> and table: <table_name>`
 
 - Body: None
 
