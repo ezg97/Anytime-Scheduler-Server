@@ -1,25 +1,25 @@
 //  --- requirements ---
-require('dotenv').config()
-const express = require('express')
-const morgan = require('morgan')
-const cors = require('cors')
-const helmet = require('helmet')
+require('dotenv').config();
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
-const { PORT, DB_URL } = require('./config')
+const { PORT, DB_URL } = require('./config');
 const scheduleRouter = require('./schedule/schedule-router');
-const authRouter = require('./auth/auth-router')
-const usersRouter = require('./users/users-router')
+const authRouter = require('./auth/auth-router');
+const usersRouter = require('./users/users-router');
 
 //  --- middleware ---
-const app = express()
+const app = express();
 
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
-app.use(morgan(morganOption))
-app.use(helmet())
-app.use(cors())
+app.use(morgan(morganOption));
+app.use(helmet());
+app.use(cors());
 
 app.use(function tableHeader(req, res, next){
   //grab the table from the header
@@ -34,24 +34,24 @@ app.use(function tableHeader(req, res, next){
 
 //  --- endpoints ---
 app.get('/', (req, res,next) => {
-    res.send('Hello, world!')
+    res.send('Hello, world!');
 });
 
 app.use(scheduleRouter);
-app.use('/api/auth', authRouter)
-app.use('/api/users', usersRouter)
+app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
 
 
 
 app.use((error, req, res, next) => {
-    let response
+    let response;
     if (NODE_ENV === 'production') {
-      response = { error: { message: `server error` }}
+      response = { error: { message: `server error` }};
     } else {
-      response = { error }
+      response = { error };
     }
-    res.status(500).json(response)
-  })
+    res.status(500).json(response);
+  });
   
 
 //  --- export ---

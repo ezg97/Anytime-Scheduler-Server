@@ -1,13 +1,13 @@
- const path = require('path')
-const express = require('express')
-const xss = require('xss')
-const ScheduleService = require('./schedule-service')
-const { requireAuth } = require('../middleware/jwt-auth')
+ const path = require('path');
+const express = require('express');
+const xss = require('xss');
+const ScheduleService = require('./schedule-service');
+const { requireAuth } = require('../middleware/jwt-auth');
 
-const scheduleRouter = express.Router()
-const jsonParser = express.json()
+const scheduleRouter = express.Router();
+const jsonParser = express.json();
 
-const logger = require('../logger')
+const logger = require('../logger');
 
 
 //sanitize the schedule table
@@ -82,9 +82,9 @@ const serializeOperation = operation => ({
   function isEmpty(obj){
     for(let key in obj){
         if(obj.hasOwnProperty(key))
-            return false
+            return false;
     }
-    return true
+    return true;
 }
 
 /*
@@ -114,8 +114,8 @@ scheduleRouter
           // the object that is being iterated.
           res.json(response.map( serializeFunction ));        
       })
-      .catch(next)
-  })
+      .catch(next);
+  });
   /* -------------------
 
     P O S T /all 
@@ -148,8 +148,8 @@ scheduleRouter
           .location(path.posix.join(req.originalUrl, `/${responseData.id}`))
           .json(serializeFunction(responseData))
       })
-      .catch(next)
-  })
+      .catch(next);
+  });
 
 
   /*
@@ -177,10 +177,10 @@ scheduleRouter
         }
         //Save the response from the request to "res.data"
         res.data = data;
-        next()
+        next();
       })
-      .catch(next)
-  })
+      .catch(next);
+  });
   /* -------------------
 
     G E T /:data_id
@@ -194,8 +194,8 @@ scheduleRouter
    
     const serializeFunction = chooseSerialize(table);
     
-    res.json( res.data.map( serializeFunction ) )
-  })
+    res.json( res.data.map( serializeFunction ) );
+  });
   /* -------------------
 
     D E L E T E /:data_id
@@ -208,27 +208,26 @@ scheduleRouter
       req.params.data_id
     )
       .then(numRowsAffected => {
-        logger.info(`${req.app.get('table')} with id ${req.params.data_id} deleted.`)
-        res.status(204).end()
+        logger.info(`${req.app.get('table')} with id ${req.params.data_id} deleted.`);
+        res.status(204).end();
       })
-      .catch(next)
-  })
+      .catch(next);
+  });
   /* -------------------
 
     P A T C H /:data_id
 
      ------------------- */
   .patch(jsonParser, (req, res, next) => {
-    //const { title, content, style } = req.body
-    const dataToUpdate = req.body; //{ title, content, style }
+    const dataToUpdate = req.body; 
 
-    const numberOfValues = Object.values(dataToUpdate).filter(Boolean).length
+    const numberOfValues = Object.values(dataToUpdate).filter(Boolean).length;
     if (numberOfValues === 0)
       return res.status(400).json({
         error: {
           message: `Request body must content either 'title', 'style' or 'content'`
         }
-      })
+      });
 
     ScheduleService.updateData(
       req.app.get('db'),
@@ -238,10 +237,10 @@ scheduleRouter
     )
     .then(numRowsAffected => {
         res.
-        status(204).end()
+        status(204).end();
       })
-      .catch(next)
-  })
+      .catch(next);
+  });
 
 
    /*
@@ -261,17 +260,17 @@ scheduleRouter
     req.params.business_id
   )
     .then(data => {
-      if (!data ) {
+      if (!data) {
         return res.status(404).json({
           error: { message: `Data Not Found` }
-        })
+        });
       }
       //Save the response from the request to "res.data"
-      res.data = data
-      next()
+      res.data = data;
+      next();
     })
     .catch(next)
-})
+});
 /* -------------------
 
   G E T /business/:business_id
@@ -288,7 +287,7 @@ scheduleRouter
   res.json(res.data.map(obj => {
     return serializeFunction(obj);
   }))
-})
+});
 /* -------------------
 
     D E L E T E /business/:business_id
@@ -301,9 +300,9 @@ scheduleRouter
         req.params.business_id
     )
       .then(numRowsAffected => {
-          res.status(204).end()
+          res.status(204).end();
       })
-      .catch(next)
-    })
+      .catch(next);
+    });
 
 module.exports = scheduleRouter;
