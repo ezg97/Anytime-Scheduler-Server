@@ -18,7 +18,9 @@ The client side repo can be found here: https://github.com/ezg97/Anytime-Schedul
 
 - Method: POST
 
-- Url Params: None
+- Query Params: None
+
+- Headers: `Authorization: Bearer <token> and table: <table_name>`
 
 - JSON inputs (parameters): `{ user_name: <user_name>, password: <password> }`
 
