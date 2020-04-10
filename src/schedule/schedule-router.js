@@ -115,7 +115,7 @@ scheduleRouter
           res.json(response.map( serializeFunction ));        
       })
       .catch(next);
-  });
+  })
   /* -------------------
 
     P O S T /all 
@@ -180,7 +180,7 @@ scheduleRouter
         next();
       })
       .catch(next);
-  });
+  })
   /* -------------------
 
     G E T /:data_id
@@ -195,7 +195,7 @@ scheduleRouter
     const serializeFunction = chooseSerialize(table);
     
     res.json( res.data.map( serializeFunction ) );
-  });
+  })
   /* -------------------
 
     D E L E T E /:data_id
@@ -212,7 +212,7 @@ scheduleRouter
         res.status(204).end();
       })
       .catch(next);
-  });
+  })
   /* -------------------
 
     P A T C H /:data_id
@@ -270,7 +270,7 @@ scheduleRouter
       next();
     })
     .catch(next)
-});
+})
 /* -------------------
 
   G E T /business/:business_id
@@ -287,7 +287,7 @@ scheduleRouter
   res.json(res.data.map(obj => {
     return serializeFunction(obj);
   }))
-});
+})
 /* -------------------
 
     D E L E T E /business/:business_id
